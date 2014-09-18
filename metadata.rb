@@ -6,7 +6,7 @@ description      'Installs/Configures nagios-herald'
 long_description 'Installs/Configures nagios-herald'
 version          '0.1.0'
 
-%w{ nagios python }.each do |dep|
+%w{ nagios python git }.each do |dep|
   depends dep
 end
 
