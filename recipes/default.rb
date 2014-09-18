@@ -84,3 +84,40 @@ cmds.each do |cmd_name, cmd_vals|
     databag_item.save
   end
 end
+
+contacts = {
+  'herald-email' => {
+    "id" => "herald-email",
+    "service_notification_commands" => "check_herald-notify-service-by-email",
+    "host_notification_commands" => "check_herald-notify-host-by-email",
+    "email" => "/dev/null",
+    "use" => "default-contact"
+  },
+  'herald-pager' => {
+    "id" => "herald-pager",
+    "service_notification_commands" => "check_herald-notify-service-by-pager",
+    "host_notification_commands" => "check_herald-notify-host-by-pager",
+    "email" => "/dev/null",
+    "use" => "default-contact"
+  },
+  'herald-irc' => {
+    "id" => "herald-irc",
+    "service_notification_commands" => "check_herald-notify-service-by-irc",
+    "host_notification_commands" => "check_herald-notify-host-by-irc",
+    "email" => "/dev/null",
+    "use" => "default-contact"
+  }
+}
+
+contacts.each do |contact_name, contact_vals|
+  Chef::Log.info("Creating DataBag('nagios_contacts:#{contact_name}')")
+  databag_item = Chef::DataBagItem.new
+  databag_item.data_bag('nagios_contacts')
+  databag_item.raw_data = contact_vals
+  if Chef::Config[:solo]
+    dbag = "#{Chef::Config[:data_bag_path]}/nagios_contacts/herald-#{contact_name}.json"
+    File.open(dbag, 'w') { |file| file.write(contact_vals.to_json) }
+  else
+    databag_item.save
+  end
+end
