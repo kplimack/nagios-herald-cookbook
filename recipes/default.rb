@@ -51,7 +51,7 @@ cmds = {
 --reply-to=#{node[:nagios][:herald][:reply_to]}"
   },
   'notify_host_by_pager' => {
-    'id' => 'herald-notify-service-by-pager',
+    'id' => 'herald-notify-host-by-pager',
     'command_line' => "#{herald_bin} --message-type pager --formatter=$_SERVICEMESSAGE_FORMATTER_NAME$ --nagios-cgi-url=#{node[:nagios][:url]}/cgi-bin/cmd.cgi
 --reply-to=#{node[:nagios][:herald][:reply_to]}"
   },
@@ -61,7 +61,7 @@ cmds = {
 --reply-to=#{node[:nagios][:herald][:reply_to]}"
   },
   'notify_host_by_irc' => {
-    'id' => 'herald-notify-service-by-irc',
+    'id' => 'herald-notify-host-by-irc',
     'command_line' => "#{herald_bin} --message-type irc --formatter=$_SERVICEMESSAGE_FORMATTER_NAME$ --nagios-cgi-url=#{node[:nagios][:url]}/cgi-bin/cmd.cgi
 --reply-to=#{node[:nagios][:herald][:reply_to]}"
   },
